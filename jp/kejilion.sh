@@ -1801,7 +1801,7 @@ patch_wp_memory_limit() {
   local TARGET_DIR="/home/web/html"    # 路径写死
 
   find "$TARGET_DIR" -type f -name "wp-config.php" | while read -r FILE; do
-	# 删除旧定义
+	# 古い定義を削除します
 	sed -i "/define(['\"]WP_MEMORY_LIMIT['\"].*/d" "$FILE"
 	sed -i "/define(['\"]WP_MAX_MEMORY_LIMIT['\"].*/d" "$FILE"
 
@@ -3318,7 +3318,7 @@ ldnmp_Proxy_backend() {
 
 	sed -i "s/yuming.com/$yuming/g" /home/web/conf.d/$yuming.conf
 
-	# 上流の構成を動的に生成します
+	# 动态生成 upstream 配置
 	upstream_servers=""
 	for server in $reverseproxy_port; do
 		upstream_servers="$upstream_servers    server $server;\n"
@@ -3691,7 +3691,7 @@ add_forwarding_service() {
 	read -e -p "イントラネットポートを入力してください：" local_port
 	read -e -p "外部ネットワークポートを入力してください：" remote_port
 
-	# ユーザー入力を構成ファイルに書き込みます
+	# 構成ファイルにユーザー入力を書き込みます
 	cat <<EOF >> /home/frp/frpc.toml
 [$service_name]
 type = ${service_type}
@@ -3878,7 +3878,7 @@ frps_panel() {
 		check_frp_app
 		check_docker_image_update $docker_name
 		echo -e "FRPサーバー$check_frp $update_status"
-		echo "FRPイントラネット侵入サービス環境を構築して、パブリックIPなしでインターネットにデバイスを公開する"
+		echo "FRPイントラネット浸透サービス環境を構築して、パブリックIPなしでインターネットにデバイスを公開する"
 		echo "公式ウェブサイトの紹介：https：//github.com/fatedier/frp/"
 		echo "ビデオ教育：https：//www.bilibili.com/video/bv1ymw6e2ewl?t=124.0"
 		if [ -d "/home/frp/" ]; then
@@ -3947,7 +3947,7 @@ frps_panel() {
 
 			8)
 				send_stats "IPアクセスをブロックします"
-				echo "アンチジェネレーションドメイン名にアクセスした場合は、この関数を使用して、より安全なIP+ポートアクセスをブロックします。"
+				echo "アンチジェネレーションドメイン名にアクセスした場合、この関数を使用して、より安全なIP+ポートアクセスをブロックできます。"
 				read -e -p "ブロックする必要があるポートを入力してください。" frps_port
 				block_host_port "$frps_port" "$ipv4_address"
 				;;
@@ -4520,7 +4520,7 @@ echo -e "${gl_lv}ルートログインがセットアップされます！${gl_b
 
 root_use() {
 clear
-[ "$EUID" -ne 0 ] && echo -e "${gl_huang}ヒント：${gl_bai}この機能には、ルートユーザーを実行する必要があります！" && break_end && kejilion
+[ "$EUID" -ne 0 ] && echo -e "${gl_huang}ヒント：${gl_bai}この機能では、ルートユーザーを実行する必要があります！" && break_end && kejilion
 }
 
 
@@ -5641,10 +5641,10 @@ linux_trash() {
 		fi
 		;;
 	  4)
-		read -e -p "确认清空回收站？[y/n]: " confirm
+		read -e -p "リサイクルビンをクリアすることを確認しますか？ [Y/N]：" confirm
 		if [[ "$confirm" == "y" ]]; then
 		  trash-empty
-		  echo "回收站已清空。"
+		  echo "リサイクルビンがクリアされました。"
 		fi
 		;;
 	  *)
@@ -5656,14 +5656,14 @@ linux_trash() {
 
 
 
-# 创建备份
+# バックアップを作成します
 create_backup() {
-	send_stats "创建备份"
+	send_stats "バックアップを作成します"
 	local TIMESTAMP=$(date +"%Y%m%d%H%M%S")
 
-	# 提示用户输入备份目录
-	echo "创建备份示例："
-	echo "  - 备份单个目录: /var/www"
+	# ユーザーにバックアップディレクトリを入力するように求めます
+	echo "バックアップ例を作成します："
+	echo "- 単一のディレクトリをバックアップします： /var /www"
 	echo "- バックアップ複数のディレクトリ： /etc /home /var /log"
 	echo "-directEnterはデフォルトのディレクトリ（ /etc /usr /home）を使用します"
 	read -r -p "ディレクトリを入力してバックアップしてください（複数のディレクトリがスペースで区切られています。直接入力する場合は、デフォルトのディレクトリを使用してください）：" input
@@ -5709,7 +5709,7 @@ create_backup() {
 	if [ $? -eq 0 ]; then
 		echo "バックアップは正常に作成されました：$BACKUP_DIR/$BACKUP_NAME"
 	else
-		echo "バックアップの作成に失敗しました！"
+		echo "备份创建失败！"
 		exit 1
 	fi
 }
@@ -5812,7 +5812,7 @@ list_connections() {
 # 新しい接続を追加します
 add_connection() {
 	send_stats "新しい接続を追加します"
-	echo "新しい接続を作成する例："
+	echo "新しい接続例を作成します："
 	echo "- 接続名：my_server"
 	echo "-  IPアドレス：192.168.1.100"
 	echo "- ユーザー名：root"
@@ -6973,7 +6973,7 @@ linux_docker() {
 					  3)
 						  send_stats "インターネットに参加してください"
 						  read -e -p "出口ネットワーク名：" dockernetwork
-						  read -e -p "これらのコンテナはネットワークを終了します（複数のコンテナ名はスペースで区切られています）：" dockernames
+						  read -e -p "これらのコンテナはネットワークを出ます（複数のコンテナ名はスペースで区切られています）：" dockernames
 
 						  for dockername in $dockernames; do
 							  docker network disconnect $dockernetwork $dockername
@@ -7165,7 +7165,7 @@ linux_test() {
 	  case $sub_choice in
 		  1)
 			  clear
-			  send_stats "CHATGPTはステータス検出のロックを解除します"
+			  send_stats "CHATGPTステータス検出のロックを解除します"
 			  bash <(curl -Ls https://cdn.jsdelivr.net/gh/missuo/OpenAI-Checker/openai.sh)
 			  ;;
 		  2)
@@ -7249,7 +7249,7 @@ linux_test() {
 
 		  18)
 			  clear
-			  send_stats "ネットワーク品質のテストスクリプト"
+			  send_stats "网络质量测试脚本"
 			  bash <(curl -sL Net.Check.Place)
 			  ;;
 
@@ -7918,7 +7918,7 @@ linux_ldnmp() {
 			  ;;
 		  2)
 			  echo "データベースのバックアップは、.GZ-endコンプレッションパッケージである必要があります。 Pagoda/1panelのバックアップデータのインポートをサポートするために、/home/directoryに入れてください。"
-			  read -e -p "ダウンロードリンクを入力して、バックアップデータをリモートでダウンロードすることもできます。 Enterを直接押して、リモートダウンロードをスキップします：" url_download_db
+			  read -e -p "ダウンロードリンクを入力して、バックアップデータをリモートでダウンロードすることもできます。 Enterを直接押してリモートダウンロードをスキップします。" url_download_db
 
 			  cd /home/
 			  if [ -n "$url_download_db" ]; then
@@ -8500,7 +8500,7 @@ linux_panel() {
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}41.  ${color41}マウス管理パネル${gl_kjlan}42.  ${color42}NEXTEリモート接続ツール"
 	  echo -e "${gl_kjlan}43.  ${color43}Rustdeskリモートデスク（サーバー）${gl_huang}★${gl_bai}          ${gl_kjlan}44.  ${color44}Rustdeskリモートデスク（リレー）${gl_huang}★${gl_bai}"
-	  echo -e "${gl_kjlan}45.  ${color45}Docker加速ステーション${gl_kjlan}46.  ${color46}GitHubアクセラレーションステーション${gl_huang}★${gl_bai}"
+	  echo -e "${gl_kjlan}45.  ${color45}Docker加速ステーション${gl_kjlan}46.  ${color46}GitHub加速ステーション${gl_huang}★${gl_bai}"
 	  echo -e "${gl_kjlan}47.  ${color47}プロメテウス監視${gl_kjlan}48.  ${color48}プロメテウス（ホスト監視）"
 	  echo -e "${gl_kjlan}49.  ${color49}プロメテウス（コンテナ監視）${gl_kjlan}50.  ${color50}補充監視ツール"
 	  echo -e "${gl_kjlan}------------------------"
@@ -8512,7 +8512,7 @@ linux_panel() {
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}61.  ${color61}オンライン翻訳サーバー${gl_kjlan}62.  ${color62}Ragflow Big Model Knowledge Base"
 	  echo -e "${gl_kjlan}63.  ${color63}OpenWebui自己ホストAIプラットフォーム${gl_huang}★${gl_bai}             ${gl_kjlan}64.  ${color64}IT-Toolsツールボックス"
-	  echo -e "${gl_kjlan}65.  ${color65}N8Nオートメーションワークフロープラットフォーム${gl_huang}★${gl_bai}               ${gl_kjlan}66.  ${color66}YT-DLPビデオダウンロードツール"
+	  echo -e "${gl_kjlan}65.  ${color65}N8Nオートメーションワークフロープラットフォーム${gl_huang}★${gl_bai}               ${gl_kjlan}66.  ${color66}yt-dlp视频下载工具"
 	  echo -e "${gl_kjlan}67.  ${color67}DDNS-GOダイナミックDNS管理ツール${gl_huang}★${gl_bai}            ${gl_kjlan}68.  ${color68}AllinsSL証明書管理プラットフォーム"
 	  echo -e "${gl_kjlan}69.  ${color69}SFTPGOファイル転送ツール${gl_kjlan}70.  ${color70}アストロボットチャットロボットフレームワーク"
 	  echo -e "${gl_kjlan}------------------------"
@@ -11416,7 +11416,7 @@ EOF
 						  ;;
 					  4)
 					   read -e -p "ユーザー名を入力してください：" username
-					   # sudoersファイルからユーザーのsudoアクセス許可を削除します
+					   # sudoersファイルからユーザーのsudo許可を削除します
 					   sed -i "/^$username\sALL=(ALL:ALL)\sALL/d" /etc/sudoers
 
 						  ;;
@@ -11521,7 +11521,7 @@ EOF
 				echo "23。カナダ時間24。メキシコの時間"
 				echo "25。ブラジル時間26。アルゼンチン時間"
 				echo "------------------------"
-				echo "31. UTC全球标准时间"
+				echo "31。UTCグローバル標準時間"
 				echo "------------------------"
 				echo "0。前のメニューに戻ります"
 				echo "------------------------"
@@ -11870,7 +11870,7 @@ EOF
 					crontab -l | grep -v '~/Limiting_Shut_down.sh' | crontab -
 					crontab -l | grep -v 'reboot' | crontab -
 					rm ~/Limiting_Shut_down.sh
-					echo "現在の制限シャットダウン関数はオフになっています"
+					echo "電流制限シャットダウン機能はオフになっています"
 					;;
 				  *)
 					break
@@ -12173,7 +12173,7 @@ EOF
 
 			  echo "プライバシーとセキュリティ"
 			  echo "スクリプトは、ユーザー機能に関するデータを収集し、スクリプトエクスペリエンスを最適化し、より楽しく便利な機能を作成します。"
-			  echo "スクリプトバージョン番号、使用時間、システムバージョン、CPUアーキテクチャ、マシンの国、および使用される関数の名前を収集します。"
+			  echo "スクリプトバージョン番号、使用時間、システムバージョン、CPUアーキテクチャ、マシンの国、使用される機能の名前を収集します。"
 			  echo "------------------------------------------------"
 			  echo -e "現在のステータス：$status_message"
 			  echo "--------------------"
@@ -12526,7 +12526,7 @@ while true; do
 	  echo -e "${gl_kjlan}バッチでタスクを実行します${gl_bai}"
 	  echo -e "${gl_kjlan}11. ${gl_bai}Tech Lionスクリプトをインストールします${gl_kjlan}12. ${gl_bai}システムを更新します${gl_kjlan}13. ${gl_bai}システムを掃除します"
 	  echo -e "${gl_kjlan}14. ${gl_bai}Dockerをインストールします${gl_kjlan}15. ${gl_bai}BBR3をインストールします${gl_kjlan}16. ${gl_bai}1G仮想メモリをセットアップします"
-	  echo -e "${gl_kjlan}17. ${gl_bai}タイムゾーンを上海に設定します${gl_kjlan}18. ${gl_bai}すべてのポートを開きます${gl_kjlan}51. ${gl_bai}自定义指令"
+	  echo -e "${gl_kjlan}17. ${gl_bai}タイムゾーンを上海に設定します${gl_kjlan}18. ${gl_bai}すべてのポートを開きます${gl_kjlan}51. ${gl_bai}カスタムコマンド"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
 	  echo -e "${gl_kjlan}0.  ${gl_bai}メインメニューに戻ります"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
@@ -12534,7 +12534,7 @@ while true; do
 
 	  case $sub_choice in
 		  1)
-			  send_stats "添加集群服务器"
+			  send_stats "クラスターサーバーを追加します"
 			  read -e -p "サーバー名：" server_name
 			  read -e -p "サーバーIP：" server_ip
 			  read -e -p "サーバーポート（22）：" server_port
@@ -12637,7 +12637,7 @@ echo "------------------------"
 echo -e "${gl_huang}ブリックワーカー、四半期あたり49ドル、米国CN2GIA、日本ソフトバンク、2つのコア、1Gメモリ、20gハードドライブ、1か月あたり1Tトラフィック${gl_bai}"
 echo -e "${gl_bai}ウェブサイト：https：//bandwagonhost.com/aff.php?aff = 69004&pid=87${gl_bai}"
 echo "------------------------"
-echo -e "${gl_lan}DMIT 28刀每季 美国CN2GIA 1核心 2G内存 20G硬盘 800G流量每月${gl_bai}"
+echo -e "${gl_lan}dmit四半期あたり28ドルUS CN2GIA 1コア2Gメモリ20Gハードドライブ800gトラフィック${gl_bai}"
 echo -e "${gl_bai}ウェブサイト：https：//www.dmit.io/aff.php?aff = 4966&pid=100${gl_bai}"
 echo "------------------------"
 echo -e "${gl_zi}V.PS月額6.9 $ 6.9東京ソフトバンク2コア1Gメモリ20gハードドライブ1Tトラフィック${gl_bai}"
@@ -12676,7 +12676,7 @@ while true; do
 	clear
 	echo "ログを更新します"
 	echo "------------------------"
-	echo "全部日志: ${gh_proxy}raw.githubusercontent.com/kejilion/sh/main/kejilion_sh_log.txt"
+	echo "すべてのログ：${gh_proxy}raw.githubusercontent.com/kejilion/sh/main/kejilion_sh_log.txt"
 	echo "------------------------"
 
 	curl -s ${gh_proxy}raw.githubusercontent.com/kejilion/sh/main/kejilion_sh_log.txt | tail -n 30

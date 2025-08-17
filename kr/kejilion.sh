@@ -315,7 +315,7 @@ status() {
 	if [ $? -eq 0 ]; then
 		echo "$1서비스 상태가 표시됩니다."
 	else
-		echo "错误：无法显示 $1서비스 상태."
+		echo "오류 : 표시 할 수 없습니다$1서비스 상태."
 	fi
 }
 
@@ -945,7 +945,7 @@ allow_ip() {
 	install iptables
 
 	for ip in "${ips[@]}"; do
-		# 删除已存在的阻止规则
+		# 기존 차단 규칙을 삭제하십시오
 		iptables -D INPUT -s $ip -j DROP 2>/dev/null
 
 		# 허용 규칙을 추가하십시오
@@ -1185,7 +1185,7 @@ iptables_panel() {
 
 			  5)
 				  # IP 화이트리스트
-				  read -e -p "해제 할 IP 또는 IP 세그먼트를 입력하십시오." o_ip
+				  read -e -p "릴리스하려면 IP 또는 IP 세그먼트를 입력하십시오." o_ip
 				  allow_ip $o_ip
 				  ;;
 			  6)
@@ -1234,7 +1234,7 @@ iptables_panel() {
 				  ;;
 
 			  17)
-				  read -e -p "청산 된 국가 코드 (예 : CN, US, JP)를 입력하십시오." country_code
+				  read -e -p "청산 된 국가 코드 (예 : CN, US, JP)를 입력하십시오 :" country_code
 				  manage_country_rules unblock $country_code
 				  send_stats "나라를 정리하십시오$country_codeIP"
 				  ;;
@@ -3947,7 +3947,7 @@ frps_panel() {
 
 			8)
 				send_stats "IP 액세스를 차단하십시오"
-				echo "반세기 도메인 이름에 액세스 한 경우이 기능을 사용하여 IP+ 포트 액세스를 차단하십시오."
+				echo "반세기 도메인 이름에 액세스 한 경우이 기능을 사용하여 IP+ 포트 액세스를 차단할 수 있습니다."
 				read -e -p "차단 해야하는 포트를 입력하십시오." frps_port
 				block_host_port "$frps_port" "$ipv4_address"
 				;;
@@ -4769,7 +4769,7 @@ dd_xitong() {
 				;;
 
 			  35)
-				send_stats "재설치 OpenSuse"
+				send_stats "重装opensuse"
 				dd_xitong_3
 				bash reinstall.sh opensuse
 				reboot
@@ -4786,7 +4786,7 @@ dd_xitong() {
 
 
 			  41)
-				send_stats "Windows 11을 다시 설치하십시오"
+				send_stats "重装windows11"
 				dd_xitong_2
 				bash InstallNET.sh -windows 11 -lang "cn"
 				reboot
@@ -5812,7 +5812,7 @@ list_connections() {
 # 새 연결을 추가하십시오
 add_connection() {
 	send_stats "새 연결을 추가하십시오"
-	echo "새 연결을 만드는 예 :"
+	echo "새 연결 예제 :"
 	echo "- 연결 이름 : my_server"
 	echo "-IP 주소 : 192.168.1.100"
 	echo "- 사용자 이름 : 루트"
@@ -6869,7 +6869,7 @@ linux_docker() {
 	  echo -e "${gl_kjlan}11.  ${gl_bai}Docker-IPV6 액세스를 활성화하십시오"
 	  echo -e "${gl_kjlan}12.  ${gl_bai}Docker-IPV6 액세스를 닫습니다"
 	  echo -e "${gl_kjlan}------------------------"
-	  echo -e "${gl_kjlan}20.  ${gl_bai}Docker 환경을 제거하십시오"
+	  echo -e "${gl_kjlan}20.  ${gl_bai}도커 환경을 제거하십시오"
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}0.   ${gl_bai}메인 메뉴로 돌아갑니다"
 	  echo -e "${gl_kjlan}------------------------${gl_bai}"
@@ -7333,7 +7333,7 @@ linux_Oracle() {
 				  read -e -p "CPU 코어 수를 입력하십시오 [기본값 :$DEFAULT_CPU_CORE]: " cpu_core
 				  local cpu_core=${cpu_core:-$DEFAULT_CPU_CORE}
 
-				  read -e -p "CPU 사용 백분율 범위 (예 : 10-20) [기본값 :$DEFAULT_CPU_UTIL]: " cpu_util
+				  read -e -p "CPU 사용량 백분율 범위 (예 : 10-20)를 입력하십시오 [기본값 :$DEFAULT_CPU_UTIL]: " cpu_util
 				  local cpu_util=${cpu_util:-$DEFAULT_CPU_UTIL}
 
 				  read -e -p "메모리 사용 백분율을 입력하십시오 [기본값 :$DEFAULT_MEM_UTIL]: " mem_util
@@ -7918,7 +7918,7 @@ linux_ldnmp() {
 			  ;;
 		  2)
 			  echo "데이터베이스 백업은 .gz-end 압축 패키지 여야합니다. Pagoda/1Panel의 백업 데이터 가져 오기를 지원하려면/홈/디렉토리에 넣으십시오."
-			  read -e -p "다운로드 링크를 입력하여 백업 데이터를 원격으로 다운로드 할 수도 있습니다. Enter가 직접 누르면 원격 다운로드를 건너 뜁니다." url_download_db
+			  read -e -p "다운로드 링크를 입력하여 백업 데이터를 원격으로 다운로드 할 수도 있습니다. 원격 다운로드를 건너 뛰려면 Enter를 직접 누르십시오." url_download_db
 
 			  cd /home/
 			  if [ -n "$url_download_db" ]; then
@@ -8512,7 +8512,7 @@ linux_panel() {
 	  echo -e "${gl_kjlan}------------------------"
 	  echo -e "${gl_kjlan}61.  ${color61}온라인 번역 서버${gl_kjlan}62.  ${color62}래그 플로 큰 모델 지식 기반"
 	  echo -e "${gl_kjlan}63.  ${color63}OpenWebui 자체 호스팅 AI 플랫폼${gl_huang}★${gl_bai}             ${gl_kjlan}64.  ${color64}it-tools 도구 상자"
-	  echo -e "${gl_kjlan}65.  ${color65}N8N 자동화 워크 플로 플랫폼${gl_huang}★${gl_bai}               ${gl_kjlan}66.  ${color66}YT-DLP 비디오 다운로드 도구"
+	  echo -e "${gl_kjlan}65.  ${color65}N8N 자동화 워크 플로 플로우 플랫폼${gl_huang}★${gl_bai}               ${gl_kjlan}66.  ${color66}YT-DLP 비디오 다운로드 도구"
 	  echo -e "${gl_kjlan}67.  ${color67}DDNS-GO 동적 DNS 관리 도구${gl_huang}★${gl_bai}            ${gl_kjlan}68.  ${color68}AllInsSL 인증서 관리 플랫폼"
 	  echo -e "${gl_kjlan}69.  ${color69}sftpgo 파일 전송 도구${gl_kjlan}70.  ${color70}Astrbot 채팅 로봇 프레임 워크"
 	  echo -e "${gl_kjlan}------------------------"
@@ -11236,7 +11236,7 @@ EOF
 			  ;;
 		  9)
 			root_use
-			send_stats "신규 사용자는 루트를 비활성화합니다"
+			send_stats "새로운 사용자가 루트를 비활성화합니다"
 			read -e -p "새 사용자 이름을 입력하십시오 (종료하려면 0을 입력하십시오) :" new_username
 			if [ "$new_username" == "0" ]; then
 				break_end
@@ -11514,7 +11514,7 @@ EOF
 				echo "유럽"
 				echo "11. 영국의 런던 시간 12. 프랑스의 파리 시간"
 				echo "13. 베를린 시간, 독일 14. 모스크바 시간, 러시아"
-				echo "15. 네덜란드에서 우트레흐트 시간 16. 스페인의 마드리드 시간"
+				echo "15. 네덜란드의 위트레흐트 시간 16. 스페인의 마드리드 시간"
 				echo "------------------------"
 				echo "미국"
 				echo "21. 서양 시간 22. 동부 시간"
@@ -12388,7 +12388,7 @@ linux_file() {
 				read -e -p "대상 경로를 입력하십시오 (새 파일 이름 또는 디렉토리 이름 포함) :" dest_path
 				if [ -z "$dest_path" ]; then
 					echo "오류 : 대상 경로를 입력하십시오."
-					send_stats "파일 또는 디렉토리 복사에 실패 : 지정되지 않은 대상 경로"
+					send_stats "复制文件或目录失败: 目标路径未指定"
 					continue
 				fi
 
@@ -12628,7 +12628,7 @@ echo "------------------------"
 echo -e "${gl_lan}Leica Cloud Hong Kong CN2 Gia 한국 이중 ISP US CN2 GIA 할인${gl_bai}"
 echo -e "${gl_bai}웹 사이트 : https://www.lcayun.com/aff/zexuqbim${gl_bai}"
 echo "------------------------"
-echo -e "${gl_lan}Racknerd $ 10.99 미국 1 코어 1G 메모리 20G 하드 드라이브 1T 트래픽 월에 한 달에 트래픽${gl_bai}"
+echo -e "${gl_lan}Racknerd $ 10.99 미국 1 코어 1G 메모리 20g 하드 드라이브 1T 트래픽 월${gl_bai}"
 echo -e "${gl_bai}웹 사이트 : https://my.racknerd.com/aff.php?aff=5501&pid=879${gl_bai}"
 echo "------------------------"
 echo -e "${gl_zi}Hostinger 52.7 달러 미국 1 코어 4G 메모리 50G 하드 드라이브 4T 트래픽 월${gl_bai}"
