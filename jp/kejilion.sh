@@ -11735,7 +11735,7 @@ EOF
 
 						  ;;
 					  2)
-						  read -e -p "削除する必要があるコンテンツを解析するために、キーワードを入力してください。" delhost
+						  read -e -p "削除する必要があるコンテンツの解析のキーワードを入力してください。" delhost
 						  sed -i "/$delhost/d" /etc/hosts
 						  send_stats "ローカルホストの解析と削除"
 						  ;;
@@ -12189,7 +12189,7 @@ EOF
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' /usr/local/bin/k
 					  sed -i 's/^ENABLE_STATS="false"/ENABLE_STATS="true"/' ~/kejilion.sh
 					  echo "コレクションが有効になっています"
-					  send_stats "プライバシーとセキュリティコレクションが有効になっています"
+					  send_stats "プライバシーとセキュリティが収集のために有効になっています"
 					  ;;
 				  2)
 					  cd ~
